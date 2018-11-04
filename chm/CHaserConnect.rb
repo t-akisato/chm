@@ -2,6 +2,7 @@
 
 # CHaserクライアント通信プログラム
 # これは書き換えない
+#test
 
 require 'socket'
 
