@@ -1,1 +1,5 @@
 [map/m009.map] HOT(テストⅢ) WIN !!
+[map/m000.map] COOL(T12h) WIN !!
+[map/m001.map] COOL(T12h) WIN !!
+[map/m001.map] COOL(T12h) WIN !!
+[map/m030.map] COOL(T12h) WIN !!

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Test用プログラム 壁にそって進む
 
-require_relative 'CHaserConnect.rb' # CHaserConnect.rbを読み込む Windows
+require_relative 'CHaserConnect2010.rb' # CHaserConnect.rbを読み込む Windows
 #斜めに敵がいたときの処理をlookあり
 # サーバに接続
 target = CHaserConnect.new("kuru") # この名前を4文字までで変更する
