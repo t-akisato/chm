@@ -952,8 +952,8 @@ loop do # 無限ループ
         action = A_SEARCH            # とりあえずLOOK
         queue.clear
     end
-    es_locate(0,0)
-    disp_mymap(x,y,mode,queue)
+#    es_locate(0,0)
+#    disp_mymap(x,y,mode,queue)
 
     # ----------------------------------------------------------------------
     @last_act = action
