@@ -9,3 +9,6 @@
 [map/m033.map] COOL(T12h) WIN !!
 [map/m035.map] COOL(T12h) WIN !!
 [map/m036.map] COOL(T12h) WIN !!
+[map\m030.map] COOL(T12i) WIN !!
+[map\m031.map] COOL(T12i) WIN !!
+[map\m031.map] COOL(T12i) WIN !!

@@ -186,15 +186,15 @@ ActSeq4I = [
   #  ["DL@...#...#.[^B].#...#.I.",[[D_UP,A_WALK]]],
 
   # トラップ仕掛ける
-  [".L@.FF#.FF#BIF#..F#...",[[D_NULL,"トラップ設置します。"],[D_UP,A_SAVE],[D_RIGHT,A_WALK],[D_LEFT,A_WALK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_RIGHT,A_PUT],[D_RIGHT,A_LOOK]],[[D_UP,A_WALK]],
-  [[D_NULL,"トラップ設置します。"],[D_UP,A_SAVE],[D_RIGHT,A_SLIDE],[D_LEFT,A_PUT],[D_RIGHT,A_WALK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
-  [".L@FF.#FF.#FIB#F..#...",[[D_NULL,"トラップ設置します。"],[D_UP,A_SAVE],[D_LEFT,A_WALK],[D_RIGHT,A_WALK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_LEFT,A_PUT],[D_LEFT,A_LOOK]],[[D_UP,A_WALK]],
-  [[D_NULL,"トラップ設置します。"],[D_UP,A_SAVE],[D_LEFT,A_SLIDE],[D_RIGHT,A_PUT],[D_LEFT,A_WALK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
-  [".L@...#.B.#[^BI]I[^B]#[^B]..#[^B][^B].",[[D_NULL,"トラップ設置します。"],[D_UP,A_SAVE],[D_LEFT,A_SLIDE],[D_UP,A_PUT],[D_RIGHT,A_PUT],[D_RIGHT,A_LOOK]] ],
-  [".L@...#.B.#[^B]I[^BI]#..[^B]#.[^B][^B]",[[D_NULL,"トラップ設置します。"],[D_UP,A_SAVE],[D_RIGHT,A_SLIDE],[D_UP,A_PUT],[D_LEFT,A_PUT],[D_LEFT,A_LOOK]] ],
-  [".L@...#.B.#BIF#..F#...",[[D_NULL,"トラップ設置します。"],[D_UP,A_SAVE],[D_RIGHT,A_LOOK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
-  [".L@...#.B.#FIB#F..#...",[[D_NULL,"トラップ設置します。"],[D_UP,A_SAVE],[D_LEFT,A_LOOK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
-  [".L@...#.F.#BIB#...#FFF",[[D_NULL,"トラップ設置します。"],[D_UP,A_SAVE],[D_DOWN,A_LOOK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
+  [".L@.FF#.FF#BIF#..F#...",[[D_NULL,"トラップ設置します。"],[D_RIGHT,A_WALK],[D_LEFT,A_WALK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_RIGHT,A_PUT],[D_RIGHT,A_LOOK]],[[D_UP,A_WALK]],
+  [[D_NULL,"トラップ設置します。"],[D_RIGHT,A_SLIDE],[D_LEFT,A_PUT],[D_RIGHT,A_WALK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
+  [".L@FF.#FF.#FIB#F..#...",[[D_NULL,"トラップ設置します。"],[D_LEFT,A_WALK],[D_RIGHT,A_WALK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_LEFT,A_PUT],[D_LEFT,A_LOOK]],[[D_UP,A_WALK]],
+  [[D_NULL,"トラップ設置します。"],[D_LEFT,A_SLIDE],[D_RIGHT,A_PUT],[D_LEFT,A_WALK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
+  [".L@...#.B.#[^BI]I[^B]#[^B]..#[^B][^B].",[[D_NULL,"トラップ設置します。"],[D_LEFT,A_SLIDE],[D_UP,A_PUT],[D_RIGHT,A_PUT],[D_RIGHT,A_LOOK]] ],
+  [".L@...#.B.#[^B]I[^BI]#..[^B]#.[^B][^B]",[[D_NULL,"トラップ設置します。"],[D_RIGHT,A_SLIDE],[D_UP,A_PUT],[D_LEFT,A_PUT],[D_LEFT,A_LOOK]] ],
+  [".L@...#.B.#BIF#..F#...",[[D_NULL,"トラップ設置します。"],[D_RIGHT,A_LOOK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
+  [".L@...#.B.#FIB#F..#...",[[D_NULL,"トラップ設置します。"],[D_LEFT,A_LOOK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
+  [".L@...#.F.#BIB#...#FFF",[[D_NULL,"トラップ設置します。"],[D_DOWN,A_LOOK],[D_UP,A_WALK],[D_DOWN,A_PUT],[D_DOWN,A_LOOK]]],
 
   ## アイテムをLOOKしてから取る
   #まとめてとれる？
