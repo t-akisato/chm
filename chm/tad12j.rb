@@ -370,6 +370,20 @@ MapXY = [[],[-1,-1],[-1,0],[-1,1],[0,-1],[0,0],[0,1],[1,-1],[1,0],[1,1]]
 
 # 関数 ------------------------------------------------------------------------
 
+# Safe?
+def isSafe?(q1,x,y)
+  if q1[1] == A_WALK || q1[1] == A_SLIDE then
+    x = x + MapXY[q1[0]][1]
+    y = y + MapXY[q1[0]][0]
+    for i in 1..9 do
+      if @enemymap[y + MapXY[i][0]][x + MapXY[i][1]] == M_DANGER then
+        return false
+      end
+    end
+  end
+  return true
+end
+
 #
 def set_enemy(ex,ey)
   for lx in 0..(@mapsize_x-1) do
@@ -512,12 +526,12 @@ def set_mymap(x, y, val2, act, dir)
   end
 
   # 相手キャラの位置は床にしておく
-#  (1..9).each do | i |
-#    if val[i] == M_CHARA
-#      val[i] = M_FLOOR
-#    end
-#  end
-#
+  #  (1..9).each do | i |
+  #    if val[i] == M_CHARA
+  #      val[i] = M_FLOOR
+  #    end
+  #  end
+  #
   case act
   when A_GETREADY
     (1..9).each do | i |
@@ -1001,7 +1015,7 @@ loop do # 無限ループ
   end
 
   # LOOKカウンターの処理
-  if queue[0][1] == A_LOOK || queue[0][1] == A_GLANCE then
+  if queue[0][1] == A_LOOK || queue[0][1] == A_GLANCE || isSafe?(queue[0],x,y) then
     look_cnt = LookInt
   else
     look_cnt -= 1
@@ -1044,7 +1058,7 @@ loop do # 無限ループ
   end
 
   if values[mode] == M_BLOCK && (action == A_WALK || action == A_SLIDE) then # ブロックに突っ込みそうなら
-    action = A_SEARCH            # とりあえずLOOK
+    action = A_SEARCH            # とりあえずSEARCH
     queue.clear
   end
   #    es_locate(0,0)
