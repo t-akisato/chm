@@ -493,10 +493,10 @@ end
 case winner
 when 0
     puts "\e[36mCOOL\e[37m(" + @name[0] +") WIN !!"
-    res =  "COOL(" + @name[0] +") WIN !!"
+    res =  "COOL " + @name[0] +" WIN !!"
 when 1
     puts "\e[35mHOT\e[37m(" + @name[1] +") WIN !!"
-    res = "HOT(" + @name[1] + ") WIN !!"
+    res = "HOT " + @name[1] + " WIN !!"
 when 2
     puts"DRAW !!"
     res = "DRAW!!"
@@ -504,7 +504,7 @@ end
 #printf("\e[0J")
 
 File.open("result.txt","a") do |mapfile|
-    mapfile.printf("[%s] %s\n", mapfilename, res)
+    mapfile.printf("%s %s\n", mapfilename, res)
 end
 
 # 強制終了
