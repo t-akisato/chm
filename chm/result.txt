@@ -1006,3 +1006,10 @@ map/m028.map COOL T12j WIN !!
 map/m028.map HOT テストⅢ WIN !!
 map/m028.map HOT テストⅢ WIN !!
 map/m028.map HOT テストⅢ WIN !!
+map/m000.map COOL T12j WIN !!
+map/m001.map COOL T12j WIN !!
+map/m002.map COOL T12j WIN !!
+map/m003.map COOL T12j WIN !!
+map/m003.map COOL T12j WIN !!
+map/m003.map HOT テストⅢ WIN !!
+map/m003.map HOT テストⅢ WIN !!
