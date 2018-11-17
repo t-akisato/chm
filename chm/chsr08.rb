@@ -255,7 +255,7 @@ end
 
 puts "IP address:" + my_address # IPアドレスを表示
 puts "接続を待っています。"
-
+sleep(0.5)
 # マルチスレッドで接続待機
 2.times do |i|
     th[i] = Thread.new(i) { |i|
