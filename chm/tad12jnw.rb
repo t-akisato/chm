@@ -669,7 +669,7 @@ def show_message()
         printf("%s\e[0K",mes)
         line += 1
     end
-    sleep(0.01)
+#    sleep(0.01)
 end
 
 def add_message(str)
