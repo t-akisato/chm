@@ -475,9 +475,9 @@ def set_mymap_1(x,y,v)
             @new_item = true
             add_message("ニューアイテム！")
         end
-        if @mymap[y][x] == M_ITEM && @mymap[y][x] != v then
+        if @mymap[y][x] == M_ITEM && v != M_ITEM then
             @map_changed = true
-            add_message("アイテムが無いですね…")
+            add_message("マップが変わってますね…")
         end
 
         if @mymap[y][x] == M_SAVE && (v == M_FLOOR || v == M_ITEM) then
@@ -529,6 +529,13 @@ def set_mymap(x, y, val2, act, dir)
         end
     end
 
+    # 相手キャラの位置は床にしておく
+    #  (1..9).each do | i |
+    #    if val[i] == M_CHARA
+    #      val[i] = M_FLOOR
+    #    end
+    #  end
+    #
     case act
     when A_GETREADY
         (1..9).each do | i |
@@ -663,7 +670,7 @@ def show_message()
         printf("%s\e[0K",mes)
         line += 1
     end
-        sleep(0.01)
+    sleep(0.01)
 end
 
 def add_message(str)
@@ -806,6 +813,7 @@ def find_route(x, y, g, mode)
             y1 = elm[1] + MapXY[dir][0]
 
             if @mymap[y1][x1] == g then
+                route << [dir2act(elm[2] << dir,mode),x1,y1]
                 return dir2act(elm[2] << dir,mode)
             elsif @mymap[y1][x1] == M_FLOOR && smap[y1][x1] == 0 then
                 squeue << [x1, y1, elm[2] + [dir]]
@@ -817,8 +825,11 @@ def find_route(x, y, g, mode)
             break
         end
     end
-
-    return []
+    if route.length > 0 then
+        return (route.dsmple)[0]
+    else
+        return []
+    end
 end
 
 # パターンマッチング用文字列を返す
@@ -952,10 +963,12 @@ loop do # 無限ループ
     set_mymap(x, y, values, A_GETREADY, mode)
 
     #新しいアイテム見つけたらキューをクリア
-    if @step > 4 && (@new_item || @map_changed )then
-
+    if @step > 4 && @new_item then
         queue.clear
         add_message("アイテム見つけたのでキュークリア。")
+    elsif @step > 4 && @map_changed then
+        queue.clear
+        add_message("マップ変わってるのでキュークリア。")
     end
 
     # マップ表示
@@ -1194,10 +1207,9 @@ loop do # 無限ループ
     if @step > 4 && @new_item then
         queue.clear
         add_message("アイテム見つけたのでキュークリア。")
-    end
-    if @step > 4 && @map_changed then
+    elsif @step > 4 && @map_changed then
         queue.clear
-        add_message("マップ変わっているのでキュークリア。")
+        add_message("マップ変わってるのでキュークリア。")
     end
     @last_values = values.dup
     @step = @step + 1
