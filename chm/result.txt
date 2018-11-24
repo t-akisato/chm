@@ -1038,3 +1038,6 @@ map/m058.map COOL T12k WIN !!
 map/m058.map COOL T12k WIN !!
 map/m058.map COOL T12k WIN !!
 map/m058.map COOL T12k WIN !!
+map/m056.map COOL T12k WIN !!
+map/m056.map COOL T12k WIN !!
+map/m056.map HOT テストⅢ WIN !!
