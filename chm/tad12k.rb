@@ -826,7 +826,7 @@ def find_route(x, y, g, mode)
         end
     end
     if route.length > 0 then
-        return (route.dsmple)[0]
+        return (route.dsmple)[0]　# imakoko
     else
         return []
     end
