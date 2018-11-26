@@ -48,7 +48,7 @@ A_GETREADY = 9
 A_C = [["N",A_NULL],["P",A_PUT],["W",A_WALK],["L",A_LOOK],["S",A_SEARCH],["D",A_SLIDE],["G",A_GLANCE],["V",A_SAVE]]
 
 # 変数宣言とか
-name = "T12k" # 名前
+name = "T12k@" # 名前
 
 values = Array.new(10) # 書き換えない
 @last_values = Array.new(10)
@@ -354,7 +354,8 @@ ActSeq2 = ActSeq4E + ActSeq4I2 + [
 ]
 #ActSeq = [ActSeq0 ,ActSeq1, ActSeq2]
 
-ActSeq = [ActSeq1,ActSeq1,ActSeq1,ActSeq0,ActSeq1]
+#ActSeq = [ActSeq1,ActSeq1,ActSeq1,ActSeq0,ActSeq1]
+ActSeq = [ActSeq0,ActSeq1]
 ActCycle = 10 # パターン切り替えターン数
 
 # 回転のための配列
@@ -607,6 +608,10 @@ def disp_mymap(x,y,mode, queue)
     #    end
 
     # queue描く
+    if @step % 10 == 0 then
+        es_clear()
+    end
+
     fill2d(@bgmap,0) # 消去
 
     @mapsize_x.times do | lx |
@@ -666,8 +671,8 @@ end
 def show_message()
     line = 0
     @message_buffer.each do |mes|
-        es_locate((@map_x +2)*2+ 2,line)
-        printf("%s\e[0K",mes)
+        es_locate((@map_x +2)*2+ 1,line)
+        printf(" %s\e[0K",mes)
         line += 1
     end
     sleep(0.01)
@@ -798,6 +803,23 @@ def checkOutside()
     @ry = ry0
 end
 
+def choice_route(route)
+    best_v = -1
+    best_r = []
+    route.each do |r|
+        dx = r[1] - @rx
+        dy = r[2] - @ry
+        dx2 = (dx - (@map_x / 2)).abs
+        dy2 = (dy - (@map_y / 2)).abs
+        v1 = 100 - r[0].length - Math.sqrt(dx2*dx2 + dy2*dy2).to_i # r[1] - @rx
+        if v1 > best_v then
+            best_v = v1
+            best_r = r
+        end
+    end
+    return best_r
+end
+
 # 進路決定 -----------------------------------
 def find_route(x, y, g, mode)
     route = []
@@ -805,7 +827,7 @@ def find_route(x, y, g, mode)
     fill2d(smap,0)
     smap[y][x] = 1
     squeue = [[x,y,[]]]
-
+    add_message("ルートを探します...")
     loop do
         elm = squeue.shift
         S_Dirs[mode].each do | dir |
@@ -814,7 +836,9 @@ def find_route(x, y, g, mode)
 
             if @mymap[y1][x1] == g then
                 route << [dir2act(elm[2] << dir,mode),x1,y1]
-                return dir2act(elm[2] << dir,mode)
+                if g == M_UNKNOWN then
+                    return dir2act(elm[2] << dir,mode)
+                end
             elsif @mymap[y1][x1] == M_FLOOR && smap[y1][x1] == 0 then
                 squeue << [x1, y1, elm[2] + [dir]]
                 smap[y1][x1] = smap[elm[1]][elm[0]] + 1
@@ -825,8 +849,9 @@ def find_route(x, y, g, mode)
             break
         end
     end
+    add_message("ルートを" + route.length.to_s + "見つけました。")
     if route.length > 0 then
-        return (route.dsmple)[0] # imakoko
+        return choice_route(route)[0]
     else
         return []
     end
@@ -1005,7 +1030,7 @@ loop do # 無限ループ
             add_message("アイテム無いのでルート検索。")
             queue = find_route(x,y, M_UNKNOWN, mode)
             item_queue = find_route(x,y, M_ITEM, mode)
-            if (item_queue.length > 0 && item_queue.length < queue.length * 2) || queue.length == 0 then
+            if (item_queue.length > 0 && item_queue.length < queue.length * 1.5) || queue.length == 0 then
                 if !item_queue.empty? then
                     add_message("アイテムへのルート見つけました。")
                 end
