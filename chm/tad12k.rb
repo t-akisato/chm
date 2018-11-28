@@ -3,7 +3,9 @@
 #require_relative 'CHaserConnect.rb' # CHaserConnect.rbを読み込む Windows
 require_relative 'CHaserConnect2009.rb' # CHaserConnect.rbを読み込む Windows
 require 'pp'
+require 'optparse'
 
+@option = {}
 # 定数 -------------------------------------------------------
 # 方向
 D_UP = 2
@@ -354,8 +356,8 @@ ActSeq2 = ActSeq4E + ActSeq4I2 + [
 ]
 #ActSeq = [ActSeq0 ,ActSeq1, ActSeq2]
 
-#ActSeq = [ActSeq1,ActSeq1,ActSeq1,ActSeq0,ActSeq1]
-ActSeq = [ActSeq0,ActSeq1]
+ActSeq = [ActSeq1,ActSeq1,ActSeq1,ActSeq0,ActSeq1]
+#ActSeq = [ActSeq0,ActSeq1]
 ActCycle = 10 # パターン切り替えターン数
 
 # 回転のための配列
@@ -476,7 +478,7 @@ def set_mymap_1(x,y,v)
             @new_item = true
             add_message("ニューアイテム！")
         end
-        if @mymap[y][x] == M_ITEM && v != M_ITEM then
+        if @mymap[y][x] == M_ITEM && v != M_ITEM && !@get_item then
             @map_changed = true
             add_message("マップが変わってますね…")
         end
@@ -675,7 +677,9 @@ def show_message()
         printf(" %s\e[0K",mes)
         line += 1
     end
-    sleep(0.01)
+    if !@option[:n] then
+        sleep(0.01)
+    end
 end
 
 def add_message(str)
@@ -956,6 +960,29 @@ end
 
 # main ##########################################################################
 
+OptionParser.new do |opt|
+    opt.on('-n', 'no wait') {|v| @option[:n] = v}
+    #    opt.on('-s', 'silent mode') {|v| @option[:s] = v}
+    #    opt.on('-r', 'save result') {|v| @option[:r] = v}
+    #    opt.on('-e cmd', 'execute cmd') {|v| @option[:e] = v}
+    #    opt.on('-m file', 'map file') {|v| @option[:map] = v}
+    #    opt.on('-p [val]', 'pause mode') {|v|
+    #        if v == "look" then
+    #            @option[:p_look] = true
+    #        elsif v == "search" then
+    #            @option[:p_search] = true
+    #        else
+    #            @option[:pause] = (v == nil) ? 1 : v.to_i
+    #            @option[:p_look] = nil
+    #            @option[:p_search] = nil
+    #            step_count = @option[:pause]
+    #        end
+    #    }
+    #    opt.on('-w time', 'wait(second)') {|v| @option[:wait] = v.to_f}
+    #    opt.on('-t turn', 'turn') {|v| @option[:t] = v.to_i}
+    opt.parse!(ARGV)
+end
+
 # サーバに接続
 target = CHaserConnect.new(name) # この名前を4文字までで変更する
 
@@ -979,6 +1006,7 @@ loop do # 無限ループ
     add_message("step "+@step.to_s)
     @new_item = false
     @map_changed = false
+    @get_item = false
     es_locate(0,@map_y+3)
     values = target.getReady # 準備信号を送り制御情報と周囲情報を取得
     if values[0] == 0        # 制御情報が0なら終了
@@ -990,7 +1018,7 @@ loop do # 無限ループ
     #新しいアイテム見つけたらキューをクリア
     if @step > 4 && @new_item then
         queue.clear
-        add_message("アイテム見つけたのでキュークリア。")
+        add_message("アイテムもしくは敵を見つけたのでキュークリア。")
     elsif @step > 4 && @map_changed then
         queue.clear
         add_message("マップ変わってるのでキュークリア。")
@@ -999,7 +1027,6 @@ loop do # 無限ループ
     # マップ表示
     es_locate(0,0)
     disp_mymap(x,y,mode,queue)
-    # --------------------------------------------------------------------
 
     #    r_values = rotate(values,mode) # 周囲情報を相対位置に
     #    rstr = (r_values.join)[1,9] # 周辺情報を文字列に
@@ -1057,11 +1084,12 @@ loop do # 無限ループ
             lqueue = []
             Directions.each do | rdir |
                 dir = rm2am(rdir,mode)
-                if countUnknown(y+MapXY[dir][0]*2,x+MapXY[dir][1]*2) >= 5 then
-                    lqueue = [[rdir, A_GLANCE]] + lqueue
-                end
-                if countUnknownS(y,x,dir) >= 6 then
+                if countUnknownS(y,x,dir) >= 4 then
                     lqueue = [[rdir, A_SEARCH]] + lqueue
+                    add_message("未探索域を SEARCH します。")
+                elsif countUnknown(y+MapXY[dir][0]*2,x+MapXY[dir][1]*2) >= 5 then
+                    lqueue = [[rdir, A_GLANCE]] + lqueue
+                    add_message("未探索域を LOOK します。")
                 end
             end
             if !lqueue.empty? then
@@ -1117,6 +1145,11 @@ loop do # 無限ループ
         action = A_SEARCH            # とりあえずSEARCH
         queue.clear
     end
+
+    if values[mode] == M_ITEM && (action == A_WALK || action == A_SLIDE) then # アイテムゲット
+        add_message("アイテムゲットです。")
+        @get_item = true
+    end
     #    es_locate(0,0)
     #    disp_mymap(x,y,mode,queue)
 
@@ -1124,7 +1157,7 @@ loop do # 無限ループ
     @last_act = action
 
     ms = ["NULL","put","walk","look","search","slide","glance","save"][action] +" " + ["","","Up","","Left","","Right","","Down"][mode]
-    add_message(ms+" します。")
+    add_message("("+ms+")")
     es_locate(0,@map_y+5)
     case action
     when A_WALK

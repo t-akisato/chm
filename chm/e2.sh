@@ -1,108 +1,20 @@
 #!/bin/bash
+
+mapfile=(`ls map`)
+echo ${mapfile[@]}
+
 echo > result.txt
+
 for i in `seq 1 10`
 do
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m000.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m001.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m002.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m003.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m004.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m005.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m006.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m007.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m008.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m009.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m010.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m011.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m012.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m013.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m014.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m015.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m016.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m017.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m018.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m019.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m020.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m021.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m022.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m023.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m024.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m025.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m026.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m027.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m028.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m029.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m030.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m031.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m032.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m033.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m034.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m035.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m036.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m037.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m038.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m039.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m040.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m041.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m042.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m043.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m044.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m045.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m046.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m047.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m048.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m049.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m050.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m051.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m052.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m053.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m054.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m055.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m056.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m057.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m058.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m059.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m060.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m061.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m062.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m063.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m064.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m065.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m066.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m067.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m068.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m069.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m070.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m071.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m072.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m073.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m074.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m075.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m076.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m077.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m078.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m079.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m080.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m081.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m082.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m083.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m084.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m085.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m086.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m087.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m088.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m089.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m090.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m091.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m092.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m093.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m094.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m095.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m096.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m097.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m098.map
-ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/m099.map
+
+	for mf in ${mapfile[@]}
+	do
+		ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/$mf
+	done
+
 done
+
 echo COOL
 grep COOL result.txt | wc -l
 echo HOT
