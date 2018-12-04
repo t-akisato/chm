@@ -808,22 +808,26 @@ def checkOutside()
 end
 
 def choice_route(route)
-    best_v = -1
+    best_v = -10000
     best_r = []
     route.each do |r|
         dx = r[1] - @rx
         dy = r[2] - @ry
         dx2 = (dx - (@map_x / 2)).abs
         dy2 = (dy - (@map_y / 2)).abs
-d1 = Math.sqrt(dx2*dx2 + dy2*dy2).to_i
+        d1 = Math.sqrt(dx2*dx2 + dy2*dy2).to_i
         case @option[:t]
         when 1
-
             v1 = (100 - r[0].length)*(100 - r[0].length) - d1 * d1
         when 2
             v1 = Math.sqrt(dx2*dx2 + dy2*dy2).to_i
         when 3
             v1 = rand(100)
+when 4
+     v1 = (100 - r[0].length)*(100 - r[0].length) + d1 * d1
+when 5
+     v1 = (100 - r[0].length) + d1 * d1
+
         else # nil (オプションなし)
             v1 = 100 - r[0].length - d1 # r[1] - @rx
         end
@@ -1098,10 +1102,11 @@ loop do # 無限ループ
             lqueue = []
             Directions.each do | rdir |
                 dir = rm2am(rdir,mode)
-                if countUnknownS(y,x,dir) >= 5 then
-                    lqueue = [[rdir, A_SEARCH]] + lqueue
-                    add_message("未探索域を SEARCH します。")
-                elsif countUnknown(y+MapXY[dir][0]*2,x+MapXY[dir][1]*2) >= 5 then
+                #                if countUnknownS(y,x,dir) >= 5 then
+                #                    lqueue = [[rdir, A_SEARCH]] + lqueue
+                #                    add_message("未探索域を SEARCH します。")
+                #                elsif countUnknown(y+MapXY[dir][0]*2,x+MapXY[dir][1]*2) >= 5 then
+                if countUnknown(y+MapXY[dir][0]*2,x+MapXY[dir][1]*2) >= 5 then
                     lqueue = [[rdir, A_GLANCE]] + lqueue
                     add_message("未探索域を LOOK します。")
                 end

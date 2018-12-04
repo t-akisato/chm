@@ -5,12 +5,14 @@ echo ${mapfile[@]}
 
 echo > result.txt
 
-for i in `seq 1 10`
+for mf in ${mapfile[@]}
 do
 
-	for mf in ${mapfile[@]}
+	for i in `seq 1 10`
 	do
+
 		ruby chsr08.rb -w .0 -s -e ./exec2s.sh -r -t 100 -m map/$mf
+
 	done
 
 done
