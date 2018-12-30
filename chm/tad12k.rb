@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-#require_relative 'CHaserConnect.rb' # CHaserConnect.rbを読み込む Windows
-require_relative 'CHaserConnect2009.rb' # CHaserConnect.rbを読み込む Windows
+require_relative 'CHaserConnect.rb' # CHaserConnect.rbを読み込む Windows
+#require_relative 'CHaserConnect2009.rb' # CHaserConnect.rbを読み込む Windows
 require 'pp'
 require 'optparse'
 
