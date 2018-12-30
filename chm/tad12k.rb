@@ -50,7 +50,7 @@ A_GETREADY = 9
 A_C = [["N",A_NULL],["P",A_PUT],["W",A_WALK],["L",A_LOOK],["S",A_SEARCH],["D",A_SLIDE],["G",A_GLANCE],["V",A_SAVE]]
 
 # 変数宣言とか
-name = "T12k@" # 名前
+name = "T12k" # 名前
 
 values = Array.new(10) # 書き換えない
 @last_values = Array.new(10)
@@ -808,14 +808,29 @@ def checkOutside()
 end
 
 def choice_route(route)
-    best_v = -1
+    best_v = -10000
     best_r = []
     route.each do |r|
         dx = r[1] - @rx
         dy = r[2] - @ry
         dx2 = (dx - (@map_x / 2)).abs
         dy2 = (dy - (@map_y / 2)).abs
-        v1 = 100 - r[0].length - Math.sqrt(dx2*dx2 + dy2*dy2).to_i # r[1] - @rx
+        d1 = Math.sqrt(dx2*dx2 + dy2*dy2).to_i
+        case @option[:t]
+        when 1
+            v1 = (100 - r[0].length)*(100 - r[0].length) - d1 * d1
+        when 2
+            v1 = Math.sqrt(dx2*dx2 + dy2*dy2).to_i
+        when 3
+            v1 = rand(100)
+when 4
+     v1 = (100 - r[0].length)*(100 - r[0].length) + d1 * d1
+when 5
+     v1 = (100 - r[0].length) + d1 * d1
+
+        else # nil (オプションなし)
+            v1 = 100 - r[0].length - d1 # r[1] - @rx
+        end
         if v1 > best_v then
             best_v = v1
             best_r = r
@@ -962,7 +977,7 @@ end
 
 OptionParser.new do |opt|
     opt.on('-n', 'no wait') {|v| @option[:n] = v}
-    #    opt.on('-s', 'silent mode') {|v| @option[:s] = v}
+    opt.on('-t type', 'search type') {|v| @option[:t] = v.to_i}
     #    opt.on('-r', 'save result') {|v| @option[:r] = v}
     #    opt.on('-e cmd', 'execute cmd') {|v| @option[:e] = v}
     #    opt.on('-m file', 'map file') {|v| @option[:map] = v}
@@ -984,6 +999,9 @@ OptionParser.new do |opt|
 end
 
 # サーバに接続
+if @option[:t] != nil then
+    name = name + @option[:t].to_s
+end
 target = CHaserConnect.new(name) # この名前を4文字までで変更する
 
 # 正規表現の前処理
@@ -1057,7 +1075,7 @@ loop do # 無限ループ
             add_message("アイテム無いのでルート検索。")
             queue = find_route(x,y, M_UNKNOWN, mode)
             item_queue = find_route(x,y, M_ITEM, mode)
-            if (item_queue.length > 0 && item_queue.length < queue.length * 1.5) || queue.length == 0 then
+            if (item_queue.length > 0 && item_queue.length < queue.length * 2) || queue.length == 0 then
                 if !item_queue.empty? then
                     add_message("アイテムへのルート見つけました。")
                 end
@@ -1084,10 +1102,11 @@ loop do # 無限ループ
             lqueue = []
             Directions.each do | rdir |
                 dir = rm2am(rdir,mode)
-                if countUnknownS(y,x,dir) >= 4 then
-                    lqueue = [[rdir, A_SEARCH]] + lqueue
-                    add_message("未探索域を SEARCH します。")
-                elsif countUnknown(y+MapXY[dir][0]*2,x+MapXY[dir][1]*2) >= 5 then
+                #                if countUnknownS(y,x,dir) >= 5 then
+                #                    lqueue = [[rdir, A_SEARCH]] + lqueue
+                #                    add_message("未探索域を SEARCH します。")
+                #                elsif countUnknown(y+MapXY[dir][0]*2,x+MapXY[dir][1]*2) >= 5 then
+                if countUnknown(y+MapXY[dir][0]*2,x+MapXY[dir][1]*2) >= 5 then
                     lqueue = [[rdir, A_GLANCE]] + lqueue
                     add_message("未探索域を LOOK します。")
                 end
