@@ -661,7 +661,7 @@ def disp_mymap(x,y,mode, queue)
             end
             es_backcolor(0)
         end
-        es_reset
+#        es_reset
 
         #        printf(" %-20s\e[0K\n", @message_buffer[msg_cnt])
         printf("\n")
